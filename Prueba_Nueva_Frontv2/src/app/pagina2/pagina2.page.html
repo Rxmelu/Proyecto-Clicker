@@ -1,0 +1,32 @@
+<ion-content [fullscreen]="true">
+
+<ion-grid>
+
+            <ion-grid>
+                <ion-row>
+                        <ion-button expand="block" (click)="Profile()"> Ir al perfil </ion-button>
+                        <ion-button expand="block" (click)="Leaderboard()"> Leaderboard </ion-button>
+                        <ion-button expand="block" (click)="Upgrades()"> Upgrades </ion-button>
+                        <ion-button expand="block" (click)="Exit()"> Exit </ion-button>
+                </ion-row>
+            </ion-grid>
+
+    <ion-row>
+        <ion-col>
+            Usuario: {{user_data.username}}
+        </ion-col>
+
+        <ion-col>
+            Monedas: {{user_data.dinero}}
+        </ion-col>
+
+        <ion-col>
+            Clicks Realizados: {{user_data.cantidad_clicks}}
+        </ion-col>
+    </ion-row>
+      
+<ion-button id="boton_clicker" (click)="Clicker()"></ion-button>
+
+</ion-grid>
+
+</ion-content>

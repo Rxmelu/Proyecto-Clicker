@@ -1,0 +1,7 @@
+{
+  "name": "Prueba_Nueva_Frontv2",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
