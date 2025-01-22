@@ -26,8 +26,9 @@
         </ion-col>
     </ion-row>
       
-<ion-button id="boton_clicker" (click)="Clicker()"></ion-button>
+<ion-button [disabled]="isCooldown"  id="boton_clicker" (click)="Clicker()" (click)="handleClick()"></ion-button>
 
 </ion-grid>
 
+<ion-img [disabled]="isCooldown" (click)="Clicker()" (click)="handleClick()" src="Galleta.png"></ion-img>
 </ion-content>

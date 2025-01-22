@@ -4,22 +4,22 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 
 @Component({
   selector: 'app-pagina2',
   templateUrl: './pagina2.page.html',
   styleUrls: ['./pagina2.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class Pagina2Page implements OnInit {
 
   // Variables Cooldown
-  private boton_clicker = document.getElementById("boton_clicker")
-
-  // Variables para el clicker (temporal)
-  public clicks_usuario: number = 0; 
-  public monedas_usuario: number = 0;
+  public cooldownTime: number = 2000;
+  public isCooldown: boolean = false;
 
   // Variables y Array para Información del Usuario 
   public id: string = "rruiz05@colegiosantamonica.eu";
@@ -37,7 +37,15 @@ export class Pagina2Page implements OnInit {
     this.getInformacion();
   }
 
-    
+  handleClick(): any {
+    if (this.isCooldown) return;
+
+    this.isCooldown = true;
+
+    setTimeout(() => {
+      this.isCooldown = false;
+    }, this.cooldownTime);
+  }
 
   Clicker(){
     this.user_data.dinero = this.user_data.dinero + 1;
@@ -70,9 +78,9 @@ export class Pagina2Page implements OnInit {
     this.router.navigate(['/pagina1'])
   };
 
+  // GET para conseguir la información del usuario
   getInformacion(){
     this.http.get(`http://localhost:3000/usuarios/${this.id}`).subscribe((response: any) => {
-      console.log(response);
       this.user_data = response;
     });
   };
