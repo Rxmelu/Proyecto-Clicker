@@ -51,8 +51,8 @@ export class Pagina2Page implements OnInit {
     this.user_data.dinero = this.user_data.dinero + 1;
     this.user_data.cantidad_clicks = this.user_data.cantidad_clicks + 1;
     if (this.user_data.cantidad_clicks == 110){
-      let boton = document.getElementById('boton_clicker')
-      boton?.remove()
+      let galleta = document.getElementById('boton_clicker')
+      galleta?.remove()
     }
   }
 

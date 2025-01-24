@@ -25,10 +25,8 @@
             Clicks Realizados: {{user_data.cantidad_clicks}}
         </ion-col>
     </ion-row>
-      
-<ion-button [disabled]="isCooldown"  id="boton_clicker" (click)="Clicker()" (click)="handleClick()"></ion-button>
 
 </ion-grid>
 
-<ion-img [disabled]="isCooldown" (click)="Clicker()" (click)="handleClick()" src="Galleta.png"></ion-img>
+<ion-img id="boton_clicker" [disabled]="isCooldown" (click)="Clicker()" (click)="handleClick()" src="../../assets/Galleta.png"></ion-img>
 </ion-content>
