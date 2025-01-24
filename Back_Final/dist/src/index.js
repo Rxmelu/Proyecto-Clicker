@@ -132,16 +132,17 @@ app.post('/user', function (req, res) { return __awaiter(void 0, void 0, void 0,
     });
 }); });
 // POST para actualizar el dinero del usuario
-app.post('/dinero', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+app.post('/dinero', jsonParser, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var query, db_response, err_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                query = "";
+                query = "UPDATE usuarios SET dinero = " + req.body.dinero + " WHERE id_usuario = 'rruiz05@colegiosantamonica.eu';";
                 return [4 /*yield*/, db.query(query)];
             case 1:
                 db_response = _a.sent();
+                res.json("Dinero Actualizado");
                 return [3 /*break*/, 3];
             case 2:
                 err_4 = _a.sent();
@@ -154,5 +155,5 @@ app.post('/dinero', function (req, res) { return __awaiter(void 0, void 0, void 
 }); });
 var port = process.env.PORT || 3000;
 app.listen(port, function () {
-    return console.log("App listening on PORT " + port + "\n    ENDPOINTS:\n    - GET /user/:email\n    - GET /usuarios/informacion/:id_usuario\n    - POST /user");
+    return console.log("App listening on PORT " + port + "\n    ENDPOINTS:\n    - GET /usuarios/:id_usuario\n    - POST /dinero\n    - POST /user");
 });

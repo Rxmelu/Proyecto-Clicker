@@ -37,16 +37,22 @@ export class Pagina2Page implements OnInit {
     this.getInformacion();
   }
 
-  handleClick(): any {
-    if (this.isCooldown) return;
-
-    this.isCooldown = true;
-
-    setTimeout(() => {
-      this.isCooldown = false;
-    }, this.cooldownTime);
+  // Funciones para el Cooldown
+  CooldownImagen(){
+    if (!this.isCooldown){
+      this.activarCooldown();
+    }
   }
 
+  activarCooldown(){
+      this.isCooldown = true;
+
+      setTimeout(() => {
+        this.isCooldown = false;
+      }, this.cooldownTime);
+    }
+
+  // Funcion del Clicker
   Clicker(){
     this.user_data.dinero = this.user_data.dinero + 1;
     this.user_data.cantidad_clicks = this.user_data.cantidad_clicks + 1;
@@ -85,4 +91,14 @@ export class Pagina2Page implements OnInit {
     });
   };
 
+  //POST para actualizar el dinero del usuario
+  updateDinero(){
+    let dinero = {
+      dinero: this.user_data.dinero
+    };
+
+    this.http.post(`http://localhost:3000/dinero`, dinero).subscribe((Response: any) => {
+      console.log(Response)
+    });
+  }
 }

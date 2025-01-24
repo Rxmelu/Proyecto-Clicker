@@ -62,10 +62,11 @@ app.post('/user', async (req, res) => {
 });
 
 // POST para actualizar el dinero del usuario
-app.post('/dinero', async (req, res) => {
+app.post('/dinero', jsonParser, async (req, res) => {
     try{
-        let query = ``
+        let query = `UPDATE usuarios SET dinero = ${req.body.dinero} WHERE id_usuario = 'rruiz05@colegiosantamonica.eu';`
         let db_response = await db.query(query);
+        res.json("Dinero Actualizado");
 
     } catch (err) {
         console.error(err);
@@ -79,6 +80,6 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => 
     console.log(`App listening on PORT ${port}
     ENDPOINTS:
-    - GET /user/:email
-    - GET /usuarios/informacion/:id_usuario
+    - GET /usuarios/:id_usuario
+    - POST /dinero
     - POST /user`));

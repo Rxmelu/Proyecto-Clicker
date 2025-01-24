@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" id="main_content">
 
 
 <ion-grid>
@@ -26,7 +26,16 @@
         </ion-col>
     </ion-row>
 
-</ion-grid>
+    <ion-img 
+    id="boton_clicker" 
+    [disabled]="isCooldown" 
+    (click)="Clicker()" 
+    (click)="CooldownImagen()"
+    (click)="updateDinero()"
+    src="../../assets/Galleta.png"
+    [class.cooldown]="isCooldown"
+    [class.disabled]="isCooldown">
+    </ion-img>
 
-<ion-img id="boton_clicker" [disabled]="isCooldown" (click)="Clicker()" (click)="handleClick()" src="../../assets/Galleta.png"></ion-img>
+</ion-grid>
 </ion-content>

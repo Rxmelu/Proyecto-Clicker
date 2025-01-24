@@ -1,3 +1,5 @@
+// CSS ion-content
+
 // CSS Botones para viajar entre las paginas.
 .botones_transporte {
     display: inline-block;
@@ -49,3 +51,18 @@
 #boton_clicker {
     animation: float 2s infinite;
 };
+
+ion-img {
+    transition: opacity 0.3s ease-in-out;
+    cursor: pointer;
+  
+    &.cooldown {
+      opacity: 0.5;
+      pointer-events: none; // Desactiva la interacción.
+      cursor: not-allowed;
+    }
+  
+    &.disabled {
+      filter: grayscale(100%); // Ejemplo visual para desactivar.
+    }
+  }
