@@ -30,13 +30,20 @@ export class Pagina2Page implements OnInit {
     cantidad_clicks: 0,
   }
 
+  
   constructor(private http: HttpClient, private router: Router) { }
 
+  accion(opcion: string) {
+    console.log('Seleccionaste:', opcion);
+    alert(`Seleccionaste: ${opcion}`);
+  }
 
   ngOnInit() {
     this.getInformacion();
   }
 
+
+  
   // Funciones para el Cooldown
   CooldownImagen(){
     if (!this.isCooldown){
@@ -98,7 +105,6 @@ export class Pagina2Page implements OnInit {
     };
 
     this.http.post(`http://localhost:3000/dinero`, dinero).subscribe((Response: any) => {
-      console.log(Response)
     });
   }
 
@@ -109,7 +115,6 @@ export class Pagina2Page implements OnInit {
     };
 
     this.http.post(`http://localhost:3000/clicks`, cantidad_clicks).subscribe((Response: any) => {
-      console.log(Response)
     });
   }
 
