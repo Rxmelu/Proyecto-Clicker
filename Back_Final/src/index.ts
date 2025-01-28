@@ -75,6 +75,20 @@ app.post('/dinero', jsonParser, async (req, res) => {
     }
 });
 
+// POST para actualizar los clicks totales del usuario
+app.post('/clicks', jsonParser, async (req, res) => {
+    try{
+        let query = `UPDATE usuarios SET cantidad_clicks = ${req.body.cantidad_clicks} WHERE id_usuario = 'rruiz05@colegiosantamonica.eu';`
+        let db_response = await db.query(query);
+        res.json("Clicks Actualizados");
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+
+    }
+});
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => 
@@ -82,4 +96,5 @@ app.listen(port, () =>
     ENDPOINTS:
     - GET /usuarios/:id_usuario
     - POST /dinero
+    - POST /clicks
     - POST /user`));

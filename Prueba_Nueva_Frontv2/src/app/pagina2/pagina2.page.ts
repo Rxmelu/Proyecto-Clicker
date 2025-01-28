@@ -91,7 +91,7 @@ export class Pagina2Page implements OnInit {
     });
   };
 
-  //POST para actualizar el dinero del usuario
+  // POST para actualizar el dinero del usuario
   updateDinero(){
     let dinero = {
       dinero: this.user_data.dinero
@@ -101,4 +101,16 @@ export class Pagina2Page implements OnInit {
       console.log(Response)
     });
   }
+
+  // POST para actualizar los clicks del usuario
+  updateClicks(){
+    let cantidad_clicks = {
+      cantidad_clicks: this.user_data.cantidad_clicks
+    };
+
+    this.http.post(`http://localhost:3000/clicks`, cantidad_clicks).subscribe((Response: any) => {
+      console.log(Response)
+    });
+  }
+
 }
