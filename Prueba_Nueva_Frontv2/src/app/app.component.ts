@@ -13,11 +13,12 @@ import { IonicModule } from '@ionic/angular';
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Perfil', url: '/folder/', icon: 'person-circle' },
+    { title: 'Perfil', url: '/pagina1/', icon: 'person-circle' },
     { title: 'Clicker', url: '/pagina2/', icon: 'diamond' },
     { title: 'Mejoras', url: '/folder/favorites', icon: 'cash' },
-    { title: 'Leaderboard', url: '/folder/archived', icon: 'cellular' },
+    { title: 'Leaderboard', url: '/pagina3/', icon: 'cellular' },
     { title: 'Exit', url: '/folder/trash', icon: 'exit' },
+    { title: 'Login', url: '/pagina-login/', icon: 'exit' },
   ];
   constructor() {
     addIcons({ personCircleSharp, personCircleOutline, cashSharp, cashOutline, cellularOutline, cellularSharp, exitOutline, exitSharp, diamondOutline, diamondSharp});

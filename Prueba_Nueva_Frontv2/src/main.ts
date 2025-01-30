@@ -1,7 +1,7 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { RouteReuseStrategy, provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
-
+import { provideAuth0 } from '@auth0/auth0-angular';
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 import { provideHttpClient } from '@angular/common/http';
@@ -12,5 +12,12 @@ bootstrapApplication(AppComponent, {
     provideIonicAngular(),
     provideRouter(routes, withPreloading(PreloadAllModules)),
     provideHttpClient(),
+    provideAuth0({
+      domain: 'dev-c6ovour4n7svtfbq.eu.auth0.com',
+      clientId: 'xrpSIUEGfZkorf4c47h7L5ifCPtdHg4A',
+      authorizationParams: {
+        redirect_uri: window.location.origin
+      }
+    }),
   ],
 });

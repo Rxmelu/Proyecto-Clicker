@@ -9,7 +9,6 @@ const jsonParser = bodyParser.json();
 import * as db from './db-connections';
 
 
-
 // GETS
 
 
@@ -18,7 +17,14 @@ app.get('/usuarios/:id_usuario', async (req, res) => {
     try {
         let query = `SELECT * FROM usuarios WHERE id_usuario='${req.params.id_usuario}'`;
         let db_response = await db.query(query);
-        res.json(db_response.rows[0])
+
+        if(db_response.rows.length > 0){
+            console.log(`Usuario encontrado: ${db_response.rows[0].id_usuario}`);
+            res.json(db_response.rows[0]);   
+        } else{
+            console.log(`Usuario no encontrado.`)
+            res.json(`User not found`);
+        }
 
     } catch (err) {
         console.error(err);
@@ -30,29 +36,19 @@ app.get('/usuarios/:id_usuario', async (req, res) => {
 
 // POSTS
 
-
-app.post('/user', async (req, res) => {
-
+// POST para crear usuarios
+app.post('/usuarios', jsonParser, async (req, res) => {
     try {
-        let query = `INSTERT INTO usuarios VALUES ('${req.body.id})', '${req.body.name}');`;
+        let query = `INSERT INTO usuarios VALUES ('${req.body.id_usuario}');`;
         let db_response = await db.query(query);
 
         console.log(db_response);
 
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Internal Server Error');
-
-    }
-});
-
-app.post('/user', async (req, res) => {
-
-    try {
-        let query = `INSTERT INTO usuarios VALUES ('${req.body.id})', '${req.body.name}');`;
-        let db_response = await db.query(query);
-
-        console.log(db_response);
+        if(db_response.rowCount == 1){
+            res.json(`El usuario ha sido registrado correctamente.`);
+        } else{
+            res.json(`El registro no ha sido registrado.`);
+        }
 
     } catch (err) {
         console.error(err);
@@ -97,4 +93,4 @@ app.listen(port, () =>
     - GET /usuarios/:id_usuario
     - POST /dinero
     - POST /clicks
-    - POST /user`));
+    - POST /usuarios`));

@@ -5,6 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { AuthService } from '@auth0/auth0-angular';
+import { analytics } from 'ionicons/icons';
 
 
 @Component({
@@ -29,9 +31,10 @@ export class Pagina2Page implements OnInit {
     dinero: 0,
     cantidad_clicks: 0,
   }
+  public user: any;
 
   
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private auth: AuthService) { }
 
   accion(opcion: string) {
     console.log('Seleccionaste:', opcion);
@@ -40,10 +43,34 @@ export class Pagina2Page implements OnInit {
 
   ngOnInit() {
     this.getInformacion();
+
+    this.auth.user$.subscribe((data) => {
+      this.user = data
+      console.log(this.user)
+    });
   }
 
+  loadUser(){
+    this.http.get(`http://localhost:3000/usuarios/${this.user.id_usuario}`).subscribe((response: any) => {
+      this.user_data = response;
+      if(response == "Usuario no encontrado."){
+        this.createUser();
+      }
+    });
+}
 
-  
+createUser(){
+  let user = {
+    user_id: this.user.email,
+    username: this.user.username,
+    dinero: this.user.dinero,
+    cantidad_clicks: this.user.cantidad_clicks
+  }
+  this.http.post(`http://localhost:3000/usuarios`, user).subscribe((response) => {
+    console.log(response)
+  })
+}
+
   // Funciones para el Cooldown
   CooldownImagen(){
     if (!this.isCooldown){
@@ -96,7 +123,7 @@ export class Pagina2Page implements OnInit {
     this.http.get(`http://localhost:3000/usuarios/${this.id}`).subscribe((response: any) => {
       this.user_data = response;
     });
-  };
+  }
 
   // POST para actualizar el dinero del usuario
   updateDinero(){

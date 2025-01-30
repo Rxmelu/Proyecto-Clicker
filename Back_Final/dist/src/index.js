@@ -77,7 +77,14 @@ app.get('/usuarios/:id_usuario', function (req, res) { return __awaiter(void 0, 
                 return [4 /*yield*/, db.query(query)];
             case 1:
                 db_response = _a.sent();
-                res.json(db_response.rows[0]);
+                if (db_response.rows.length > 0) {
+                    console.log("Usuario encontrado: " + db_response.rows[0].id_usuario);
+                    res.json(db_response.rows[0]);
+                }
+                else {
+                    console.log("Usuario no encontrado.");
+                    res.json("User not found");
+                }
                 return [3 /*break*/, 3];
             case 2:
                 err_1 = _a.sent();
@@ -89,17 +96,24 @@ app.get('/usuarios/:id_usuario', function (req, res) { return __awaiter(void 0, 
     });
 }); });
 // POSTS
-app.post('/user', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+// POST para crear usuarios
+app.post('/usuarios', jsonParser, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var query, db_response, err_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                query = "INSTERT INTO usuarios VALUES ('" + req.body.id + ")', '" + req.body.name + "');";
+                query = "INSERT INTO usuarios VALUES ('" + req.body.id_usuario + "');";
                 return [4 /*yield*/, db.query(query)];
             case 1:
                 db_response = _a.sent();
                 console.log(db_response);
+                if (db_response.rowCount == 1) {
+                    res.json("El usuario ha sido registrado correctamente.");
+                }
+                else {
+                    res.json("El registro no ha sido registrado.");
+                }
                 return [3 /*break*/, 3];
             case 2:
                 err_2 = _a.sent();
@@ -110,30 +124,9 @@ app.post('/user', function (req, res) { return __awaiter(void 0, void 0, void 0,
         }
     });
 }); });
-app.post('/user', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var query, db_response, err_3;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                query = "INSTERT INTO usuarios VALUES ('" + req.body.id + ")', '" + req.body.name + "');";
-                return [4 /*yield*/, db.query(query)];
-            case 1:
-                db_response = _a.sent();
-                console.log(db_response);
-                return [3 /*break*/, 3];
-            case 2:
-                err_3 = _a.sent();
-                console.error(err_3);
-                res.status(500).send('Internal Server Error');
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
-        }
-    });
-}); });
 // POST para actualizar el dinero del usuario
 app.post('/dinero', jsonParser, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var query, db_response, err_4;
+    var query, db_response, err_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -145,8 +138,8 @@ app.post('/dinero', jsonParser, function (req, res) { return __awaiter(void 0, v
                 res.json("Dinero Actualizado");
                 return [3 /*break*/, 3];
             case 2:
-                err_4 = _a.sent();
-                console.error(err_4);
+                err_3 = _a.sent();
+                console.error(err_3);
                 res.status(500).send('Internal Server Error');
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
@@ -155,7 +148,7 @@ app.post('/dinero', jsonParser, function (req, res) { return __awaiter(void 0, v
 }); });
 // POST para actualizar los clicks totales del usuario
 app.post('/clicks', jsonParser, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var query, db_response, err_5;
+    var query, db_response, err_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -167,8 +160,8 @@ app.post('/clicks', jsonParser, function (req, res) { return __awaiter(void 0, v
                 res.json("Clicks Actualizados");
                 return [3 /*break*/, 3];
             case 2:
-                err_5 = _a.sent();
-                console.error(err_5);
+                err_4 = _a.sent();
+                console.error(err_4);
                 res.status(500).send('Internal Server Error');
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
@@ -177,5 +170,5 @@ app.post('/clicks', jsonParser, function (req, res) { return __awaiter(void 0, v
 }); });
 var port = process.env.PORT || 3000;
 app.listen(port, function () {
-    return console.log("App listening on PORT " + port + "\n    ENDPOINTS:\n    - GET /usuarios/:id_usuario\n    - POST /dinero\n    - POST /clicks\n    - POST /user");
+    return console.log("App listening on PORT " + port + "\n    ENDPOINTS:\n    - GET /usuarios/:id_usuario\n    - POST /dinero\n    - POST /clicks\n    - POST /usuarios");
 });
