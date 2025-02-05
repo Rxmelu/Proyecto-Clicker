@@ -10,19 +10,19 @@
         </ion-col>
 
         <ion-col>
-            Usuario: {{user_data.username}} 
+            Usuario: {{user.nickname}} 
         </ion-col>
 
         <ion-col>
-            Monedas: {{user_data.dinero}}
+            Monedas: {{user.dinero}}
         </ion-col>
 
         <ion-col>
-            Clicks Realizados: {{user_data.cantidad_clicks}}
+            Clicks Realizados: {{user.cantidad_clicks}}
         </ion-col>
     </ion-row>
+    
             <ion-grid>
-
                 <ion-button id="boton_desplegable">
                     Mostrar más
                   </ion-button>
@@ -37,7 +37,6 @@
                       </ion-list>
                     </ng-template>
                   </ion-popover>
-
             </ion-grid>
 
     <ion-img 

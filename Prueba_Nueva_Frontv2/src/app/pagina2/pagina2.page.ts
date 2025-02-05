@@ -24,7 +24,6 @@ export class Pagina2Page implements OnInit {
   public isCooldown: boolean = false;
 
   // Variables y Array para Información del Usuario 
-  public id: string = "rruiz05@colegiosantamonica.eu";
   public user_data = {
     user_id: "",
     username: "",
@@ -42,16 +41,18 @@ export class Pagina2Page implements OnInit {
   }
 
   ngOnInit() {
-    this.getInformacion();
+    //this.getInformacion();
 
     this.auth.user$.subscribe((data) => {
       this.user = data
       console.log(this.user)
+
+      this.loadUser();
     });
   }
-
+  
   loadUser(){
-    this.http.get(`http://localhost:3000/usuarios/${this.user.id_usuario}`).subscribe((response: any) => {
+    this.http.get(`http://localhost:3000/usuarios/${this.user.email}`).subscribe((response: any) => {
       this.user_data = response;
       if(response == "Usuario no encontrado."){
         this.createUser();
@@ -63,8 +64,8 @@ createUser(){
   let user = {
     user_id: this.user.email,
     username: this.user.username,
-    dinero: this.user.dinero,
-    cantidad_clicks: this.user.cantidad_clicks
+    dinero: this.user_data.dinero,
+    cantidad_clicks: this.user_data.cantidad_clicks
   }
   this.http.post(`http://localhost:3000/usuarios`, user).subscribe((response) => {
     console.log(response)
@@ -119,11 +120,11 @@ createUser(){
   };
 
   // GET para conseguir la información del usuario
-  getInformacion(){
-    this.http.get(`http://localhost:3000/usuarios/${this.id}`).subscribe((response: any) => {
-      this.user_data = response;
-    });
-  }
+ //  getInformacion(){
+    // this.http.get(`http://localhost:3000/usuarios/${this.id}`).subscribe((response: any) => {
+      // this.user_data = response;
+    //});
+  //}
 
   // POST para actualizar el dinero del usuario
   updateDinero(){
