@@ -1,43 +1,27 @@
 <ion-content [fullscreen]="true" id="main_content">
 
+  <ion-grid>
+    <ion-button id="boton_desplegable">
+        Mostrar más
+      </ion-button>
+
+      <ion-col>
+        Usuario: {{ usuarios.username }}
+      </ion-col>
+
+      <ion-popover trigger="boton_desplegable" dismissOnSelect="true">
+        <ng-template>
+          <ion-list>
+            <ion-button class="botones_navegar" color="mycustomcolor" expand="block" (click)="Profile()"> Ir al perfil </ion-button>
+            <ion-button class="botones_navegar" expand="block" (click)="Leaderboard()"> Leaderboard </ion-button>
+            <ion-button class="botones_navegar" expand="block" (click)="Upgrades()"> Upgrades </ion-button>
+            <ion-button class="botones_navegar" expand="block" (click)="Exit()"> Salir. </ion-button>
+          </ion-list>
+        </ng-template>
+      </ion-popover>
+</ion-grid>
 
 <ion-grid>
-
-    <ion-row>
-
-        <ion-col>
-          Foto: <img src={{user.picture}}>
-        </ion-col>
-
-        <ion-col>
-            Usuario: {{user.nickname}} 
-        </ion-col>
-
-        <ion-col>
-            Monedas: {{user.dinero}}
-        </ion-col>
-
-        <ion-col>
-            Clicks Realizados: {{user.cantidad_clicks}}
-        </ion-col>
-    </ion-row>
-    
-            <ion-grid>
-                <ion-button id="boton_desplegable">
-                    Mostrar más
-                  </ion-button>
-
-                  <ion-popover trigger="boton_desplegable" dismissOnSelect="true">
-                    <ng-template>
-                      <ion-list>
-                        <ion-button class="botones_navegar" color="mycustomcolor" expand="block" (click)="Profile()"> Ir al perfil </ion-button>
-                        <ion-button class="botones_navegar" expand="block" (click)="Leaderboard()"> Leaderboard </ion-button>
-                        <ion-button class="botones_navegar" expand="block" (click)="Upgrades()"> Upgrades </ion-button>
-                        <ion-button class="botones_navegar" expand="block" (click)="Exit()"> Exit </ion-button>
-                      </ion-list>
-                    </ng-template>
-                  </ion-popover>
-            </ion-grid>
 
     <ion-img 
     id="boton_clicker" 
@@ -50,6 +34,14 @@
     [class.cooldown]="isCooldown"
     [class.disabled]="isCooldown">
     </ion-img>
+
+    <ion-col>
+      Dinero: {{ usuarios.dinero }}
+    </ion-col>
+
+    <ion-col>
+      Clicks: {{ usuarios.cantidad_clicks }}
+    </ion-col>
 
 </ion-grid>
 </ion-content>

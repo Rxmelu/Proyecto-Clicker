@@ -83,7 +83,7 @@ app.get('/usuarios/:id_usuario', function (req, res) { return __awaiter(void 0, 
                 }
                 else {
                     console.log("Usuario no encontrado.");
-                    res.json("User not found");
+                    res.json("Usuario no encontrado.");
                 }
                 return [3 /*break*/, 3];
             case 2:
@@ -102,10 +102,13 @@ app.post('/usuarios', jsonParser, function (req, res) { return __awaiter(void 0,
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                query = "INSERT INTO usuarios VALUES ('" + req.body.id_usuario + "');";
-                return [4 /*yield*/, db.query(query)];
+                console.log(req.body);
+                _a.label = 1;
             case 1:
+                _a.trys.push([1, 3, , 4]);
+                query = "INSERT INTO usuarios VALUES ('" + req.body.id_usuario + "', '" + req.body.username + "', '" + req.body.dinero + "', '" + req.body.cantidad_clicks + "', '" + req.body.cantidad_generada + "', '" + req.body.upgrade1 + "', '" + req.body.upgrade2 + "');";
+                return [4 /*yield*/, db.query(query)];
+            case 2:
                 db_response = _a.sent();
                 console.log(db_response);
                 if (db_response.rowCount == 1) {
@@ -114,61 +117,69 @@ app.post('/usuarios', jsonParser, function (req, res) { return __awaiter(void 0,
                 else {
                     res.json("El registro no ha sido registrado.");
                 }
-                return [3 /*break*/, 3];
-            case 2:
+                return [3 /*break*/, 4];
+            case 3:
                 err_2 = _a.sent();
                 console.error(err_2);
                 res.status(500).send('Internal Server Error');
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
         }
     });
 }); });
 // POST para actualizar el dinero del usuario
-app.post('/dinero', jsonParser, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+app.post('/dinero/:id_usuario', jsonParser, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var query, db_response, err_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                query = "UPDATE usuarios SET dinero = " + req.body.dinero + " WHERE id_usuario = 'rruiz05@colegiosantamonica.eu';";
-                return [4 /*yield*/, db.query(query)];
+                console.log("Petici\u00F3n recibida al endpoint POST /dinero/:id_usuario");
+                _a.label = 1;
             case 1:
-                db_response = _a.sent();
-                res.json("Dinero Actualizado");
-                return [3 /*break*/, 3];
+                _a.trys.push([1, 3, , 4]);
+                query = "UPDATE usuarios SET dinero = " + req.body.dinero + " WHERE id_usuario = '" + req.params.id_usuario + "';";
+                return [4 /*yield*/, db.query(query)];
             case 2:
+                db_response = _a.sent();
+                res.json("La cantidad de dinero ha sido actualizado");
+                console.log("Dinero Updated");
+                return [3 /*break*/, 4];
+            case 3:
                 err_3 = _a.sent();
                 console.error(err_3);
                 res.status(500).send('Internal Server Error');
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
         }
     });
 }); });
 // POST para actualizar los clicks totales del usuario
-app.post('/clicks', jsonParser, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+app.post('/clicks/:id_usuario', jsonParser, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var query, db_response, err_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                query = "UPDATE usuarios SET cantidad_clicks = " + req.body.cantidad_clicks + " WHERE id_usuario = 'rruiz05@colegiosantamonica.eu';";
-                return [4 /*yield*/, db.query(query)];
+                console.log("Petici\u00F3n recibida al endpoint POST /clicks/:id_usuario");
+                _a.label = 1;
             case 1:
-                db_response = _a.sent();
-                res.json("Clicks Actualizados");
-                return [3 /*break*/, 3];
+                _a.trys.push([1, 3, , 4]);
+                query = "UPDATE usuarios SET cantidad_clicks = " + req.body.cantidad_clicks + " WHERE id_usuario = '" + req.params.id_usuario + "';";
+                return [4 /*yield*/, db.query(query)];
             case 2:
+                db_response = _a.sent();
+                res.json("La cantidad de Clicks ha sido actualizada");
+                console.log("Clicks Updated");
+                return [3 /*break*/, 4];
+            case 3:
                 err_4 = _a.sent();
                 console.error(err_4);
                 res.status(500).send('Internal Server Error');
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
         }
     });
 }); });
 var port = process.env.PORT || 3000;
 app.listen(port, function () {
-    return console.log("App listening on PORT " + port + "\n    ENDPOINTS:\n    - GET /usuarios/:id_usuario\n    - POST /dinero\n    - POST /clicks\n    - POST /usuarios");
+    return console.log("App listening on PORT " + port + "\n    ENDPOINTS:\n    - GET /usuarios/:id_usuario\n    - POST /dinero/:id_usuario\n    - POST /clicks/:id_usuario\n    - POST /usuarios");
 });

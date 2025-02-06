@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pagina1',
@@ -22,12 +23,31 @@ export class Pagina1Page implements OnInit {
     cantidad_generada: 0
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
 
   ngOnInit() {
     this.getInformacion();
   }
+
+  Clicker(){
+
+    this.router.navigate(['/pagina2'])
+  };
+
+  Upgrades(){
+    
+    this.router.navigate(['/pagina2'])
+  };
+
+  Leaderboard(){
+    
+    this.router.navigate(['/pagina3'])
+  };
+
+  Exit(){
+    this.router.navigate(['/pagina-login'])
+  };
 
   getInformacion(){
     this.http.get(`http://localhost:3000/usuarios/${this.id}`).subscribe((response: any) => {

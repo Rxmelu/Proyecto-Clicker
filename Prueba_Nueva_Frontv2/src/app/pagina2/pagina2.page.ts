@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
-import { analytics } from 'ionicons/icons';
+import { analytics, logIn } from 'ionicons/icons';
 
 
 @Component({
@@ -24,24 +24,21 @@ export class Pagina2Page implements OnInit {
   public isCooldown: boolean = false;
 
   // Variables y Array para Información del Usuario 
-  public user_data = {
+  public usuarios = {
     user_id: "",
     username: "",
     dinero: 0,
     cantidad_clicks: 0,
+    cantidad_generada: 0,
+    upgrade1: 0,
+    upgrade2: 0,
   }
   public user: any;
 
   
-  constructor(private http: HttpClient, private router: Router, private auth: AuthService) { }
-
-  accion(opcion: string) {
-    console.log('Seleccionaste:', opcion);
-    alert(`Seleccionaste: ${opcion}`);
-  }
+  constructor(private http: HttpClient, private router: Router, private auth: AuthService, @Inject (DOCUMENT) public document: Document) { }
 
   ngOnInit() {
-    //this.getInformacion();
 
     this.auth.user$.subscribe((data) => {
       this.user = data
@@ -53,7 +50,7 @@ export class Pagina2Page implements OnInit {
   
   loadUser(){
     this.http.get(`http://localhost:3000/usuarios/${this.user.email}`).subscribe((response: any) => {
-      this.user_data = response;
+      this.usuarios = response;
       if(response == "Usuario no encontrado."){
         this.createUser();
       }
@@ -61,13 +58,16 @@ export class Pagina2Page implements OnInit {
 }
 
 createUser(){
-  let user = {
-    user_id: this.user.email,
-    username: this.user.username,
-    dinero: this.user_data.dinero,
-    cantidad_clicks: this.user_data.cantidad_clicks
+  let usuarios = {
+    id_usuario: this.user.email,
+    username: this.user.nickname,
+    dinero: 1,
+    cantidad_clicks: 1,
+    cantidad_generada: 1,
+    upgrade1: 1,
+    upgrade2: 1,
   }
-  this.http.post(`http://localhost:3000/usuarios`, user).subscribe((response) => {
+  this.http.post(`http://localhost:3000/usuarios`, usuarios).subscribe((response) => {
     console.log(response)
   })
 }
@@ -87,11 +87,12 @@ createUser(){
       }, this.cooldownTime);
     }
 
+
   // Funcion del Clicker
   Clicker(){
-    this.user_data.dinero = this.user_data.dinero + 1;
-    this.user_data.cantidad_clicks = this.user_data.cantidad_clicks + 1;
-    if (this.user_data.cantidad_clicks == 110){
+    this.usuarios.dinero = this.usuarios.dinero + 1;
+    this.usuarios.cantidad_clicks = this.usuarios.cantidad_clicks + 1;
+    if (this.usuarios.cantidad_clicks == 110){
       let galleta = document.getElementById('boton_clicker')
       galleta?.remove()
     }
@@ -115,34 +116,26 @@ createUser(){
   };
 
   Exit(){
-    
     this.router.navigate(['/pagina1'])
   };
-
-  // GET para conseguir la información del usuario
- //  getInformacion(){
-    // this.http.get(`http://localhost:3000/usuarios/${this.id}`).subscribe((response: any) => {
-      // this.user_data = response;
-    //});
-  //}
 
   // POST para actualizar el dinero del usuario
   updateDinero(){
     let dinero = {
-      dinero: this.user_data.dinero
+      dinero: this.usuarios.dinero
     };
 
-    this.http.post(`http://localhost:3000/dinero`, dinero).subscribe((Response: any) => {
+    this.http.post(`http://localhost:3000/dinero/${this.user.email}`, dinero).subscribe((Response: any) => {
     });
   }
 
   // POST para actualizar los clicks del usuario
   updateClicks(){
     let cantidad_clicks = {
-      cantidad_clicks: this.user_data.cantidad_clicks
+      cantidad_clicks: this.usuarios.cantidad_clicks
     };
 
-    this.http.post(`http://localhost:3000/clicks`, cantidad_clicks).subscribe((Response: any) => {
+    this.http.post(`http://localhost:3000/clicks/${this.user.email}`, cantidad_clicks).subscribe((Response: any) => {
     });
   }
 

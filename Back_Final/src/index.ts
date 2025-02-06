@@ -7,6 +7,7 @@ import bodyParser from 'body-parser';
 const jsonParser = bodyParser.json();
 
 import * as db from './db-connections';
+import { reduceEachLeadingCommentRange } from "typescript";
 
 
 // GETS
@@ -23,7 +24,7 @@ app.get('/usuarios/:id_usuario', async (req, res) => {
             res.json(db_response.rows[0]);   
         } else{
             console.log(`Usuario no encontrado.`)
-            res.json(`User not found`);
+            res.json(`Usuario no encontrado.`);
         }
 
     } catch (err) {
@@ -38,8 +39,9 @@ app.get('/usuarios/:id_usuario', async (req, res) => {
 
 // POST para crear usuarios
 app.post('/usuarios', jsonParser, async (req, res) => {
+    console.log(req.body)
     try {
-        let query = `INSERT INTO usuarios VALUES ('${req.body.id_usuario}');`;
+        let query = `INSERT INTO usuarios VALUES ('${req.body.id_usuario}', '${req.body.username}', '${req.body.dinero}', '${req.body.cantidad_clicks}', '${req.body.cantidad_generada}', '${req.body.upgrade1}', '${req.body.upgrade2}');`;
         let db_response = await db.query(query);
 
         console.log(db_response);
@@ -58,11 +60,13 @@ app.post('/usuarios', jsonParser, async (req, res) => {
 });
 
 // POST para actualizar el dinero del usuario
-app.post('/dinero', jsonParser, async (req, res) => {
+app.post('/dinero/:id_usuario', jsonParser, async (req, res) => {
+    console.log(`Petición recibida al endpoint POST /dinero/:id_usuario`)
     try{
-        let query = `UPDATE usuarios SET dinero = ${req.body.dinero} WHERE id_usuario = 'rruiz05@colegiosantamonica.eu';`
+        let query = `UPDATE usuarios SET dinero = ${req.body.dinero} WHERE id_usuario = '${req.params.id_usuario}';`
         let db_response = await db.query(query);
-        res.json("Dinero Actualizado");
+        res.json("La cantidad de dinero ha sido actualizado");
+        console.log("Dinero Updated")
 
     } catch (err) {
         console.error(err);
@@ -72,11 +76,13 @@ app.post('/dinero', jsonParser, async (req, res) => {
 });
 
 // POST para actualizar los clicks totales del usuario
-app.post('/clicks', jsonParser, async (req, res) => {
+app.post('/clicks/:id_usuario', jsonParser, async (req, res) => {
+    console.log(`Petición recibida al endpoint POST /clicks/:id_usuario`)
     try{
-        let query = `UPDATE usuarios SET cantidad_clicks = ${req.body.cantidad_clicks} WHERE id_usuario = 'rruiz05@colegiosantamonica.eu';`
+        let query = `UPDATE usuarios SET cantidad_clicks = ${req.body.cantidad_clicks} WHERE id_usuario = '${req.params.id_usuario}';`
         let db_response = await db.query(query);
-        res.json("Clicks Actualizados");
+        res.json("La cantidad de Clicks ha sido actualizada");
+        console.log("Clicks Updated")
 
     } catch (err) {
         console.error(err);
@@ -91,6 +97,6 @@ app.listen(port, () =>
     console.log(`App listening on PORT ${port}
     ENDPOINTS:
     - GET /usuarios/:id_usuario
-    - POST /dinero
-    - POST /clicks
+    - POST /dinero/:id_usuario
+    - POST /clicks/:id_usuario
     - POST /usuarios`));
