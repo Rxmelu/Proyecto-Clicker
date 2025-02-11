@@ -22,5 +22,9 @@ export const routes: Routes = [
   {
     path: 'pagina-login',
     loadComponent: () => import('./pagina-login/pagina-login.page').then( m => m.PaginaLoginPage)
+  },  {
+    path: 'pagina-upgrades',
+    loadComponent: () => import('./pagina-upgrades/pagina-upgrades.page').then( m => m.PaginaUpgradesPage)
   },
+
 ];
