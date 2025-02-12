@@ -157,7 +157,7 @@ createUser(){
 
   Upgrades(){
     
-    this.router.navigate(['/pagina1'])
+    this.router.navigate(['/pagina-upgrades'])
   };
 
   Leaderboard(){

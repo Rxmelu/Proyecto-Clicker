@@ -1,13 +1,11 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>pagina_upgrades</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">pagina_upgrades</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  <h3> Cooldown Upgrade </h3>
+  <ion-button (click)="mejorarCooldown()"> Mejorar </ion-button>
+  <ion-progress-bar value="0"></ion-progress-bar>
+
+  <h3> Dinero Upgrade </h3>
+  <ion-button (click)="mejorarDinero()"> Mejorar </ion-button>
+  <ion-progress-bar value="0"></ion-progress-bar>
+
 </ion-content>
