@@ -1,15 +1,17 @@
 import { Component, Inject, inject, OnInit } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import { AuthService } from '@auth0/auth0-angular';
+import { IonContent, IonHeader, IonToolbar, IonTitle,
+  IonList, IonIcon, IonMenu, IonLabel, IonRouterOutlet,
+ IonMenuButton, IonMenuToggle, IonListHeader, IonButton, IonFab, IonFabButton, IonFabList } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-pagina-login',
   templateUrl: './pagina-login.page.html',
   styleUrls: ['./pagina-login.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonContent, IonHeader, IonToolbar, IonTitle, IonList, IonIcon, IonMenu, IonLabel, IonRouterOutlet, IonMenuButton, IonMenuToggle, IonListHeader, IonButton, IonFab, IonFabButton, IonFabList, CommonModule, FormsModule]
 })
 export class PaginaLoginPage implements OnInit {
 

@@ -1,13 +1,16 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonContent, IonHeader, IonToolbar, IonTitle,
+  IonList, IonIcon, IonMenu, IonLabel, IonRouterOutlet,
+ IonMenuButton, IonMenuToggle, IonListHeader, IonButton, IonFab, IonFabButton, IonFabList, IonImg } from '@ionic/angular/standalone';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { addIcons } from 'ionicons';
 import { analytics, logIn, menuOutline } from 'ionicons/icons';
+import { IonicModule } from '@ionic/angular';
 
 
 @Component({
@@ -15,10 +18,14 @@ import { analytics, logIn, menuOutline } from 'ionicons/icons';
   templateUrl: './pagina2.page.html',
   styleUrls: ['./pagina2.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule],
+  imports: [IonContent, IonHeader, IonToolbar, IonTitle, IonList, IonMenu, IonLabel, IonRouterOutlet, IonMenuButton, IonIcon, IonMenuToggle, IonListHeader, IonButton, IonFab, IonFabButton, IonFabList, IonImg, CommonModule, FormsModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class Pagina2Page implements OnInit {
+
+  // variables URL
+  public url: string = 'https://proyecto-clicker.onrender.com'
+  // public url: string = 'https://localhost:3000/'
 
   // Audios
   private audio_click = new Audio('/assets/sounds/galleta_sonido.mp3')
@@ -56,7 +63,7 @@ export class Pagina2Page implements OnInit {
   }
   
   loadUser(){
-    this.http.get(`http://localhost:3000/usuarios/${this.user.email}`).subscribe((response: any) => {
+    this.http.get(`${this.url}/usuarios/${this.user.email}`).subscribe((response: any) => {
       this.usuarios = response;
       if(response == "Usuario no encontrado."){
         this.createUser();
@@ -116,7 +123,7 @@ createUser(){
     upgrade1: 0,
     upgrade2: 0,
   }
-  this.http.post(`http://localhost:3000/usuarios`, usuarios).subscribe((response) => {
+  this.http.post(`${this.url}/usuarios`, usuarios).subscribe((response) => {
     console.log(response)
   })
 }
@@ -142,7 +149,7 @@ createUser(){
     this.audio_click.play()
     this.usuarios.dinero = this.usuarios.dinero + this.Suma_Dinero;
     this.usuarios.cantidad_clicks = this.usuarios.cantidad_clicks + 1;
-    if (this.usuarios.cantidad_clicks == 10000){
+    if (this.usuarios.cantidad_clicks >= 10000){
       let galleta = document.getElementById('boton_clicker')
       galleta?.remove()
     }
@@ -183,7 +190,7 @@ createUser(){
       dinero: this.usuarios.dinero
     };
 
-    this.http.post(`http://localhost:3000/dinero/${this.user.email}`, dinero).subscribe((Response: any) => {
+    this.http.post(`${this.url}/dinero/${this.user.email}`, dinero).subscribe((Response: any) => {
     });
   }
 
@@ -193,7 +200,7 @@ createUser(){
       cantidad_clicks: this.usuarios.cantidad_clicks
     };
 
-    this.http.post(`http://localhost:3000/clicks/${this.user.email}`, cantidad_clicks).subscribe((Response: any) => {
+    this.http.post(`${this.url}/clicks/${this.user.email}`, cantidad_clicks).subscribe((Response: any) => {
     });
   }
 
