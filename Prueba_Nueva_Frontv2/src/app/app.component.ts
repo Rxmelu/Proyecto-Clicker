@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { personCircleSharp, personCircleOutline, cashOutline, cashSharp, cellularOutline, cellularSharp, exitOutline, exitSharp, diamondSharp, diamondOutline} from 'ionicons/icons';
+import * as icons from 'ionicons/icons';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
@@ -21,6 +21,6 @@ export class AppComponent {
     { title: 'Login', url: '/pagina-login/', icon: 'exit' },
   ];
   constructor() {
-    addIcons({ personCircleSharp, personCircleOutline, cashSharp, cashOutline, cellularOutline, cellularSharp, exitOutline, exitSharp, diamondOutline, diamondSharp});
+    addIcons(icons)
   }
 }

@@ -35,19 +35,6 @@ export class Pagina1Page implements OnInit {
     this.router.navigate(['/pagina2'])
   };
 
-  Upgrades(){
-    
-    this.router.navigate(['/pagina2'])
-  };
-
-  Leaderboard(){
-    
-    this.router.navigate(['/pagina3'])
-  };
-
-  Exit(){
-    this.router.navigate(['/pagina-login'])
-  };
 
   getInformacion(){
     this.http.get(`http://localhost:3000/usuarios/${this.id}`).subscribe((response: any) => {

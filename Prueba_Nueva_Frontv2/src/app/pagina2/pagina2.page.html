@@ -1,25 +1,27 @@
 <ion-content [fullscreen]="true" id="main_content">
 
-  <ion-grid>
-    <ion-button id="boton_desplegable">
-        Mostrar más
-      </ion-button>
-
-      <ion-col>
-        Usuario: {{ usuarios.username }}
-      </ion-col>
-
-      <ion-popover trigger="boton_desplegable" dismissOnSelect="true">
-        <ng-template>
-          <ion-list>
-            <ion-button class="botones_navegar" color="mycustomcolor" expand="block" (click)="Profile()"> Ir al perfil </ion-button>
-            <ion-button class="botones_navegar" expand="block" (click)="Leaderboard()"> Leaderboard </ion-button>
-            <ion-button class="botones_navegar" expand="block" (click)="Upgrades()"> Upgrades </ion-button>
-            <ion-button class="botones_navegar" expand="block" (click)="Exit()"> Salir. </ion-button>
-          </ion-list>
-        </ng-template>
-      </ion-popover>
-</ion-grid>
+  <ion-fab slot="fixed" vertical="top" horizontal="start">
+    <ion-fab-button shape="round">
+      <ion-icon name="menu-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="bottom">
+      <ion-fab-button>
+        <ion-icon name="person-circle-outline" (click)="Profile()"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="podium-outline" (click)="Leaderboard()"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="storefront-outline" (click)="Upgrades()"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="exit-outline" (click)="Exit()"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="tennisball-outline" (click)="Login()"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
 
 <ion-grid>
 
