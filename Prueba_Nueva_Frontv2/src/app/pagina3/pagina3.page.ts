@@ -21,4 +21,9 @@ export class Pagina3Page implements OnInit {
     
   }
 
+  Clicker(){
+
+    this.router.navigate(['/pagina2'])
+  };
+
 }
