@@ -99,4 +99,5 @@ app.listen(port, () =>
     - GET /usuarios/:id_usuario
     - POST /dinero/:id_usuario
     - POST /clicks/:id_usuario
-    - POST /usuarios`));
+    - POST /usuarios`
+));
