@@ -18,6 +18,7 @@ export class Pagina3Page implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    
   }
 
 }
