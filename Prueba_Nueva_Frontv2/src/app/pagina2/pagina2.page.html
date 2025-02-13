@@ -36,14 +36,11 @@
     [class.cooldown]="isCooldown"
     [class.disabled]="isCooldown">
     </ion-img>
-
-    <ion-col>
-      Dinero: {{ usuarios.dinero }}
-    </ion-col>
-
-    <ion-col>
-      Clicks: {{ usuarios.cantidad_clicks }}
-    </ion-col>
+  
+    <ion-row>
+        <ion-img id="monedas" src="../../assets/Moneda.png"></ion-img> 
+        <ion-img id="clicks_hechos" src="../../assets/clicks.png"></ion-img>
+    </ion-row>
 
 </ion-grid>
 </ion-content>

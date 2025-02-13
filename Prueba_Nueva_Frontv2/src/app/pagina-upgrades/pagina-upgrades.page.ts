@@ -13,12 +13,15 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
   templateUrl: './pagina-upgrades.page.html',
   styleUrls: ['./pagina-upgrades.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonToolbar, IonTitle, IonList, IonIcon, IonMenu, IonLabel, IonRouterOutlet, IonMenuButton, IonMenuToggle, IonListHeader, IonButtons, CommonModule, FormsModule, IonProgressBar, Router, NgModule],
+  imports: [IonContent, IonHeader, IonToolbar, IonTitle, IonList, IonIcon, IonMenu, IonLabel, IonRouterOutlet, IonMenuButton, IonMenuToggle, IonListHeader, IonButtons, CommonModule, FormsModule, IonProgressBar],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PaginaUpgradesPage implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
+
+  public url: string = 'https://proyecto-clicker.onrender.com'
+  // public url: string = 'https://localhost:3000/'
 
   public valueDinero: number = 0
 

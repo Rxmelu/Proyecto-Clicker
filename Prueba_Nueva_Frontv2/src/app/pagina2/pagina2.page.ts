@@ -9,8 +9,6 @@ import { Router } from '@angular/router';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { addIcons } from 'ionicons';
-import { analytics, logIn, menuOutline } from 'ionicons/icons';
-import { IonicModule } from '@ionic/angular';
 
 
 @Component({
@@ -29,6 +27,7 @@ export class Pagina2Page implements OnInit {
 
   // Audios
   private audio_click = new Audio('/assets/sounds/galleta_sonido.mp3')
+  private audio_fondo= new Audio('')
 
   // Variables Dinero y Clicks
   public Suma_Dinero: number = 1

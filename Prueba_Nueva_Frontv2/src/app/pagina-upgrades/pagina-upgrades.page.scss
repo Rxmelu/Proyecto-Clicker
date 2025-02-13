@@ -1,0 +1,10 @@
+#boton_volver::part(native) {
+    background-color: #e6c681;
+    border-radius: 30px;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    color: black;
+  }
+  
+  #boton_volver:hover {
+      transform: scale(1.1);
+    }

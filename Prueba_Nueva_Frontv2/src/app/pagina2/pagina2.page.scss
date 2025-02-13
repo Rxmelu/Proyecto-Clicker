@@ -1,9 +1,13 @@
+// Fondo
 ion-content {
     --background:none;
     background-image: url('../../assets/fondo.jpg');
     height: 100%;
     background-size: cover;
   }
+
+
+// CSS Boton Navegar
 
 ion-fab-button::part(native) {
   background-color: #e6c681;
@@ -20,6 +24,25 @@ ion-fab-button {
   ion-fab-button:hover {
     transform: scale(1.1); /* Aumenta ligeramente el tamaño */
   }
+
+
+#monedas {
+  height: 5%;
+  max-height: 5%;
+  width: 5%;
+  max-width: 5%;
+  display: block;
+  margin: 0 auto;
+}
+
+#clicks_hechos {
+  height: 5%;
+  max-height: 5%;
+  width: 5%;
+  max-width: 5%;
+  display: block;
+  margin: 0 auto;
+}
 
 // CSS Galleta + Cooldown
 
@@ -51,10 +74,7 @@ ion-fab-button {
 };
   
 
-ion-img {
-    transition: opacity 0.3s ease-in-out;
-    cursor: pointer;
-  
+#boton_clicker {
     &.cooldown {
       opacity: 0.5;
       pointer-events: none; // Desactiva la interacción.
