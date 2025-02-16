@@ -108,7 +108,6 @@ export class Pagina2Page implements OnInit {
           console.log("Mejora_2 Nivel 5")
           console.log(this.cooldownTime)
       }
-      
     });
 }
 
@@ -155,22 +154,32 @@ createUser(){
   }
 
 
-  // Navegadores a otras paginas
+  // Función para ir a la pagina del perfil.
   Profile(){
 
     this.router.navigate(['/pagina1'])
   };
 
+  // Función para ir a la pagina de upgrades.
   Upgrades(){
+    let user_info = {
+      id: this.user.email,
+      username: this.user.nickname,
+      dinero: this.usuarios.dinero,
+      upgrade1: this.usuarios.upgrade1,
+      upgrade2: this.usuarios.upgrade2
+    }
     
-    this.router.navigate(['/pagina-upgrades'])
+    this.router.navigate(['/pagina-upgrades', user_info])
   };
 
+  // Función para ir a la pagina del leaderboard.
   Leaderboard(){
     
     this.router.navigate(['/pagina3'])
   };
 
+  // Función para deslogearse.
   Exit(){
     this.auth.logout ({
       logoutParams: {
@@ -179,6 +188,7 @@ createUser(){
     });
   };
 
+  // Función para moverse a la pagina del login. (TEMPORAL)
   Login(){
     this.router.navigate(['/pagina-login'])
   };
