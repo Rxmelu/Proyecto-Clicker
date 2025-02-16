@@ -28,6 +28,7 @@ export class PaginaUpgradesPage implements OnInit {
   public progresoCooldown: number = 0
   public progresoDinero: number = 0
   public progresoPasivo: number = 0
+  public ProgresoXXX: number = 0
 
   public user: any;
   public user_info: any
