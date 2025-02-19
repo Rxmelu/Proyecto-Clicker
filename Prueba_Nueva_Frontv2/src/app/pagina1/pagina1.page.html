@@ -13,15 +13,13 @@
             <ion-label>
               <p> Username: {{ user_info.username }} </p>
 
-              <p> Nivel Mejora "XXX": </p>
-              
-              <p> Nivel Mejora "XXX": </p>
-              
-              <p> Dinero: {{ user_data.dinero }} </p>
+              <p> Dinero: {{user_info.dinero}} </p>
             
-              <p> Clicks totales realizados: {{ user_data.cantidad_clicks }} </p>
+              <p> Clicks totales realizados: {{user_info.cantidad_clicks}} </p>
+
+              <p> Nivel de Mejora 1: {{ user_info.upgrade1 }} </p>
               
-              <p> Cantidad de dinero total generada: {{ user_data.cantidad_generada }}</p>
+              <p> Nivel Mejora 2: {{user_info.upgrade2 }} </p>
             </ion-label>
           </ion-item>
         </ion-list>

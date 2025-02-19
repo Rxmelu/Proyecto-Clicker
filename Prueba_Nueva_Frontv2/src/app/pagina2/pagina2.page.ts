@@ -177,6 +177,7 @@ createUser(){
       upgrade1: this.usuarios.upgrade1,
       upgrade2: this.usuarios.upgrade2
     }
+    console.log(user_info)
     
     this.router.navigate(['/pagina-upgrades', user_info])
   };

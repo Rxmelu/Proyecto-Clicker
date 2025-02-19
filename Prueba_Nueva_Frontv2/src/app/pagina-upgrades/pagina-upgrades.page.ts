@@ -83,7 +83,7 @@ export class PaginaUpgradesPage implements OnInit {
     }
   }
 
-  mejorarCooldown(){
+  mejorarDinero(){
       if (this.user_info.upgrade1 == 0) {
       this.user_info.dinero = this.user_info.dinero - 100
       this.user_info.upgrade1 = this.user_info.upgrade1 + 1
@@ -91,16 +91,20 @@ export class PaginaUpgradesPage implements OnInit {
       });
       console.log("Upgrade1 subido a nivel 1") 
 
-    } else if (this.user_info.upgrade1 == 1) {
+    } /*else if (this.user_info.upgrade1 == 1) {
       this.user_info.dinero = this.user_info.dinero - 200
       this.user_info.dinero = this.user_info.upgrade1 + 1
       this.http.post(`${this.url}/upgrade1/${this.user_info.id}`, this.user_info.upgrade1).subscribe((Response: any) => {
       });
       console.log("Upgrade1 subido a nivel 2")
-    }
+    }*/
   }
 
-  mejorarDinero(){}
+  mejorarCooldown(){
+    if (this.user_info.upgrade2 == 0){
+
+    }
+  }
 
   Clicker(){
 

@@ -28,7 +28,6 @@ export class Pagina1Page implements OnInit {
   ngOnInit() {
     this.user_info = this.route.snapshot.params
     console.log(this.user_info)
-    console.log(this.url)
   }
 
   Clicker(){
