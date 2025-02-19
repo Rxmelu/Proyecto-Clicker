@@ -228,8 +228,21 @@ export class PaginaUpgradesPage implements OnInit {
   }
 
   Clicker(){
+    let usuarios2 = {
+      id_usuario: this.user_info.id,
+      username: this.informacion.username,
+      dinero: this.informacion.dinero,
+      cantidad_clicks: this.informacion.cantidad_clicks,
+      upgrade1: this.informacion.upgrade1,
+      upgrade2: this.informacion.upgrade2,
+      cantidad_generada: this.informacion.cantidad_generada
+    }
 
-    this.router.navigate(['/pagina2'])
+    this.router.navigate(['/pagina2', usuarios2])
   };
+
+  reload(){
+    location.reload()
+  }
 
 }

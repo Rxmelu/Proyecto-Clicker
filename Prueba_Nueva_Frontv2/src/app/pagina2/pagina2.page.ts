@@ -6,6 +6,7 @@ import { IonContent, IonHeader, IonToolbar, IonTitle,
  IonMenuButton, IonMenuToggle, IonListHeader, IonButton, IonFab, IonFabButton, IonFabList, IonImg } from '@ionic/angular/standalone';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { addIcons } from 'ionicons';
@@ -45,12 +46,14 @@ export class Pagina2Page implements OnInit {
     upgrade1: 0,
     upgrade2: 0,
   }
+  public usuarios2: any;
   public user: any;
 
   
-  constructor(private http: HttpClient, private router: Router, private auth: AuthService, @Inject (DOCUMENT) public document: Document) { }
+  constructor(private http: HttpClient, private router: Router, private auth: AuthService, @Inject (DOCUMENT) public document: Document, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.usuarios2 = this.route.snapshot.params
 
     this.auth.user$.subscribe((data) => {
       this.user = data
@@ -146,7 +149,7 @@ createUser(){
     this.audio_click.play()
     this.usuarios.dinero = this.usuarios.dinero + this.Suma_Dinero;
     this.usuarios.cantidad_clicks = this.usuarios.cantidad_clicks + 1;
-    if (this.usuarios.cantidad_clicks >= 10000){
+    if (this.usuarios.cantidad_clicks >= 1000000){
       let galleta = document.getElementById('boton_clicker')
       galleta?.remove()
     }
@@ -218,4 +221,7 @@ createUser(){
     });
   }
 
+  reload(){
+    location.reload()
+  }
 }

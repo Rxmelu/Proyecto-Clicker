@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true" id="main_content">
+<ion-content [fullscreen]="true" id="main_content" >
 
   <ion-fab slot="fixed" vertical="top" horizontal="start">
     <ion-fab-button shape="round">
@@ -41,6 +41,12 @@
       <ion-img id="monedas" src="../../assets/Moneda.png"></ion-img><p id="textoDinero"> {{ usuarios.dinero }}</p>
       <p id="textoClicks"> {{ usuarios.cantidad_clicks }}</p><ion-img id="clicks_hechos" src="../../assets/clicks.png"></ion-img>
     </ion-row>
+
+    <script>
+      window.onload = function() {
+        window.location.reload();
+      }
+    </script>
 
 </ion-grid>
 </ion-content>
