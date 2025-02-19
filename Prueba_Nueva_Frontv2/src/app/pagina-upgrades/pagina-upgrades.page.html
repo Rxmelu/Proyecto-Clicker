@@ -4,12 +4,12 @@
     <ion-icon slot="icon-only" name="caret-back-circle-outline"></ion-icon>
   </ion-button>
 
-  <h3> Cooldown Upgrade </h3>
-  <ion-button (click)="mejorarCooldown()"> Mejorar </ion-button>
-  <ion-progress-bar [value]="progresoCooldown"></ion-progress-bar>
+  <h3 class="TextoPrecio"> Cooldown Upgrade | Coste: {{ CosteCooldown }} </h3>
+  <ion-progress-bar id="barraCooldown" [value]="progresoCooldown"></ion-progress-bar>
+  <ion-button class="botonesCSS" (click)="mejorarCooldown()"> Mejorar </ion-button>
 
-  <h3> Dinero Upgrade </h3>
-  <ion-button (click)="mejorarDinero()"> Mejorar </ion-button>
-  <ion-progress-bar value="0"></ion-progress-bar>
+  <h3 class="TextoPrecio" > Dinero Upgrade | Coste: {{ CosteDinero }} </h3>
+  <ion-progress-bar id="barraDinero" [value]="progresoDinero"></ion-progress-bar>
+  <ion-button class="botonesCSS" (click)="mejorarDinero()"> Mejorar </ion-button>
 
 </ion-content>

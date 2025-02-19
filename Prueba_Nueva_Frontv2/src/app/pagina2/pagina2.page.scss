@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Texto_Cookie";
+  src: url("/assets/fonts/Super Comic.otf");
+}
+
 // Fondo
 ion-content {
     --background:none;
@@ -25,33 +30,13 @@ ion-fab-button {
     transform: scale(1.1); /* Aumenta ligeramente el tamaño */
   }
 
-
-  @keyframes spin {
-    0%, 100% {
-      transform: scaleX(1);
-    }
-    50% {
-      transform: scaleX(0.2);
-    }
-  }
-  
-  @keyframes bounce {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-  
-
 #monedas {
   height: 5%;
   max-height: 5%;
   width: 5%;
   max-width: 5%;
-  display: block;
-  margin: 0 auto;
+  display: flex;
+  margin-left: 20%;
 }
 
 #clicks_hechos {
@@ -59,9 +44,22 @@ ion-fab-button {
   max-height: 5%;
   width: 5%;
   max-width: 5%;
-  display: block;
-  margin: 0 auto;
+  display: flex;
+  margin-right: 20%;
 }
+
+#textoDinero {
+  font-family: 'Texto_Cookie';
+  margin-right: 20%;
+  margin-top: 40px;
+}
+
+#textoClicks {
+  font-family: 'Texto_Cookie';
+  margin-left: 20%;
+  margin-top: 40px;
+}
+
 
 // CSS Galleta + Cooldown
 

@@ -1,26 +1,89 @@
-ion-list {
-    margin: 10px;
-  }
-  
-  ion-item {
-    background: #f4f4f4;
-    margin-bottom: 8px;
-    border-radius: 8px;
-  }
-  
-  ion-label h2 {
-    font-size: 1.2em;
-    font-weight: bold;
-  }
-  
-  ion-label p {
-    font-size: 1em;
-    color: #555;
-  }
+@font-face {
+  font-family: "Texto_Cookie";
+  src: url("/assets/fonts/Super Comic.otf");
+}
 
   ion-content {
     --background:none;
     background-image: url('../../assets/fondo.jpg');
     height: 100%;
     background-size: cover;
+  }
+
+  // CSS para el boton de volver al Clicker
+#boton_volver::part(native) {
+  background-color: #e6c681;
+  border-radius: 30px;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  color: black;
+}
+
+#boton_volver:hover {
+    transform: scale(1.1);
+  }
+
+#tabla1{
+  display: block;
+  margin-right: 80px;
+  width: 500px;
+  color: white;
+  border-radius: 16px;
+  background-image: linear-gradient(125deg, #6d5144, #f0ab73);
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#tabla2{
+    display: block;
+    margin-left: 80px;
+    width: 500px;
+    color: white;
+    border-radius: 16px;
+    background-image: linear-gradient(125deg, #6d5144, #f0ab73);
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .texto {
+    font-family: 'Texto_Cookie';
+  }
+
+  .titulo {
+    font-family: 'Texto_Cookie';
+    font-size: 1rem;
+    font-weight: bold;
+    color: beige;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    position: relative;
+    padding: 10px 20px;
+    display: inline-block;
+  
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      width: 50px;
+      height: 4px;
+      background: beige;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  
+    &::before {
+      left: -60px;
+    }
+  
+    &::after {
+      right: -60px;
+    }
+  }
+  
+  // Efecto sombra animado opcional
+  .header-title:hover {
+    text-shadow: 3px 3px 5px black;
+    transition: text-shadow 0.3s ease-in-out;
   }

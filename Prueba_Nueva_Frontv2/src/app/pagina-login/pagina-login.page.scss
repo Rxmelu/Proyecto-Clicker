@@ -4,3 +4,91 @@ ion-content {
     height: 100%;
     background-size: cover;
   }
+
+  @font-face {
+    font-family: "Texto_Cookie";
+    src: url("/assets/fonts/Super Squad.ttf");
+  }
+
+  #logo {
+    display: block;
+    margin: 0 auto;
+    margin-top: 5%;
+    width: 50%;
+    max-width: 100%;
+    height: 50%;
+    max-width: 100%;
+    border: none;
+    border-radius: 50%;
+    position: relative;
+    animation: flotar 3s ease-in-out infinite;
+
+};
+
+@keyframes flotar {
+  0%, 100% {
+      transform: translateY(0);
+  }
+  50% {
+      transform: translateY(-20px);
+  }
+}
+
+#boton1 {
+  font-family: 'Texto_Cookie';
+  display: block;
+  margin: 0 auto;
+  padding: 15px 200px; // Botón alargado con más padding
+  font-size: 16px; // Tamaño de la fuente
+  font-weight: bold;
+  text-align: center; // Alineación del texto
+  text-decoration: none;
+  border-radius: 30px; // Bordes redondeados
+  background-image: linear-gradient(45deg, #f0ab73, #6d5144);
+  color: #fff; // Color del texto
+  transition: background-color 0.3s ease, transform 0.2s ease; // Transiciones suaves
+
+  // Efecto hover
+  &:hover {
+    background-image: linear-gradient(45deg, #6d5144, #f0ab73);
+    transform: scale(1.05); // Efecto de aumento al hacer hover
+  }
+}
+
+#boton1::part(native) {
+  background-image: linear-gradient(45deg, #6d5144, #f0ab73);
+  border-radius: 30px;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  color: black;
+}
+
+#boton2 {
+  font-family: 'Texto_Cookie';
+  display: block;
+  margin: 0 auto;
+  margin-top: 1%;
+  padding: 15px 200px; // Botón alargado con más padding
+  font-size: 16px; // Tamaño de la fuente
+  font-weight: bold;
+  text-align: center; // Alineación del texto
+  text-decoration: none;
+  border-radius: 30px; // Bordes redondeados
+  background-image: linear-gradient(45deg, #6d5144, #f0ab73);
+  color: #fff; // Color del texto
+  transition: background-color 0.3s ease, transform 0.2s ease; // Transiciones suaves
+
+  // Efecto hover
+  &:hover {
+    background-image: linear-gradient(45deg, #f0ab73, #6d5144);
+    transform: scale(1.05); // Efecto de aumento al hacer hover
+  }
+}
+
+#boton2::part(native) {
+  background-image: linear-gradient(45deg, #6d5144, #f0ab73);
+  border-radius: 30px;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  color: black;
+}
+
+// Estilo para centrar el botón en su contenedor

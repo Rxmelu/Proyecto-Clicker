@@ -1,7 +1,12 @@
 <ion-content [fullscreen]="true">
 
-  <ion-button (click)="login()"> Jugar </ion-button>
+  <ion-img id="logo" src="../../assets/LogoGalletronix.png"></ion-img>
 
-  <ion-button (click)="logout()"> Salir </ion-button>
+
+  <ion-grid>
+    <ion-row> <ion-button id="boton1" (click)="login()"> Jugar </ion-button> </ion-row>
+    <ion-row> <ion-button id="boton2" (click)="logout()"> Salir </ion-button> </ion-row>
+
+  </ion-grid>
 
 </ion-content>

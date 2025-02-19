@@ -17,9 +17,22 @@ import { Router } from '@angular/router';
 })
 export class Pagina3Page implements OnInit {
 
+    // variables URL
+    public url: string = 'https://proyecto-clicker.onrender.com'
+    // public url: string = 'https://localhost:3000/'
+
+    public usuarios: any = [
+    ]
+
+    public usuarios2: any = [
+    ]
+
   constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit() {
+    this.cargarDinero();
+    this.cargarClicks();
+    console.log(this.usuarios)
     
   }
 
@@ -28,4 +41,15 @@ export class Pagina3Page implements OnInit {
     this.router.navigate(['/pagina2'])
   };
 
+  cargarClicks(){
+    this.http.get(`${this.url}/leader_clicks`).subscribe((response: any) => {
+      this.usuarios = response;
+    });
+  }
+
+  cargarDinero(){
+    this.http.get(`${this.url}/leader_dinero`).subscribe((response: any) => {
+      this.usuarios2 = response;
+    });
+  }
 }

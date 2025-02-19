@@ -4,37 +4,37 @@
     <ion-icon slot="icon-only" name="caret-back-circle-outline"></ion-icon>
   </ion-button>
 
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Leaderboard</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+<ion-row>
+
+  <ion-grid id="tabla1">
+    <h1 class="titulo"> 🏆 Leaderboard Clicks </h1>
   
-  <ion-grid>
-    <ion-row>
+    <ion-row *ngFor="let usuario of usuarios; let i = index">
       <ion-col>
-        <ion-list>
-          <ion-item>
-            <ion-label>
-              <p> # </p>
-              <h2> Name </h2>
-              <p> Clicks totales realizados: </p>
-            </ion-label>
-          </ion-item>
-        </ion-list>
+        <p class="texto"> {{ usuario.username }}</p>
       </ion-col>
+     
       <ion-col>
-      <ion-list>
-        <ion-item>
-          <ion-label>
-            <p> #</p>
-            <h2> Name </h2>
-            <p> Cantidad dinero total generada: </p>
-          </ion-label>
-        </ion-item>
-      </ion-list>
-      </ion-col>
+        <p class="texto"> {{ usuario.cantidad_clicks}}</p>
+      </ion-col>  
     </ion-row>
   </ion-grid>
+
+  <ion-grid id="tabla2">
+    <h1 class="titulo"> 🏆 Leaderboard Dinero </h1>
+  
+    <ion-row *ngFor="let usuario2 of usuarios2; let i = index">
+   
+     <ion-col>
+       <p class="texto"> {{ usuario2.username }}</p>
+     </ion-col>
+   
+     <ion-col>
+       <p class="texto"> {{ usuario2.dinero }}</p>
+     </ion-col>
+   </ion-row>
+  </ion-grid>
+</ion-row>
 
   </ion-content>

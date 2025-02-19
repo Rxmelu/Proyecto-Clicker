@@ -27,7 +27,6 @@ export class Pagina2Page implements OnInit {
 
   // Audios
   private audio_click = new Audio('/assets/sounds/galleta_sonido.mp3')
-  private audio_fondo= new Audio('')
 
   // Variables Dinero y Clicks
   public Suma_Dinero: number = 1
@@ -159,6 +158,7 @@ createUser(){
     let user_info = {
       id_usuario: this.user.email,
       username: this.user.nickname,
+      profile: this.user.picture,
       dinero: this.usuarios.dinero,
       cantidad_clicks: this.usuarios.cantidad_clicks,
       upgrade1: this.usuarios.upgrade1,
@@ -171,11 +171,7 @@ createUser(){
   // Función para ir a la pagina de upgrades.
   Upgrades(){
     let user_info = {
-      id: this.user.email,
-      username: this.user.nickname,
-      dinero: this.usuarios.dinero,
-      upgrade1: this.usuarios.upgrade1,
-      upgrade2: this.usuarios.upgrade2
+      id: this.user.email
     }
     console.log(user_info)
     

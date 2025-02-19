@@ -25,85 +25,206 @@ export class PaginaUpgradesPage implements OnInit {
   public url: string = 'https://proyecto-clicker.onrender.com'
   // public url: string = 'https://localhost:3000/'
 
+  public CosteDinero: any = 100
+  public CosteCooldown: any = 100
   public progresoCooldown: number = 0
   public progresoDinero: number = 0
-  public progresoPasivo: number = 0
-
-  public user: any;
   public user_info: any
+  public informacion: any
+  
 
   ngOnInit() {
     this.user_info = this.route.snapshot.params
+
+    this.getInformacion();
+
     console.log(this.user_info)
-
-    this.nivelCooldown();
-    this.nivelDinero();
-    this.nivelPasivo();
-  }
-
-  nivelCooldown(){
-    if (this.user_info.upgrade1 == 1){
-      this.progresoCooldown = this.progresoCooldown + 0.2 // En total sería 0.20
-    } else if (this.user_info.upgrade1 == 2){
-      this.progresoCooldown = this.progresoCooldown + 0.2 // En total sería 0.40
-    } else if (this.user_info.upgrade1 == 3){
-      this.progresoCooldown = this.progresoCooldown + 0.2 // En total sería 0.60
-    } else if (this.user_info.upgrade1 == 4){
-      this.progresoCooldown = this.progresoCooldown + 0.2 // En total sería 0.80
-    } else if (this.user_info.upgrade1 == 5){
-      this.progresoCooldown = this.progresoCooldown + 0.2 // En total sería 1
-    }
   }
 
   nivelDinero(){
-    if (this.user_info.upgrade2 == 1){
+    if (this.informacion.upgrade1 == 1){
       this.progresoDinero = this.progresoDinero + 0.2 // En total sería 0.20
-    } else if (this.user_info.upgrade2 == 2){
+      this.CosteDinero = 200
+    } else if (this.informacion.upgrade1 == 2){
       this.progresoDinero = this.progresoDinero + 0.2 // En total sería 0.40
-    } else if (this.user_info.upgrade2 == 3){
+      this.CosteDinero = 350
+    } else if (this.informacion.upgrade1 == 3){
       this.progresoDinero = this.progresoDinero + 0.2 // En total sería 0.60
-    } else if (this.user_info.upgrade2 == 4){
+      this.CosteDinero = 500
+    } else if (this.informacion.upgrade1 == 4){
       this.progresoDinero = this.progresoDinero + 0.2 // En total sería 0.80
-    } else if (this.user_info.upgrade2 == 5){
+      this.CosteDinero = 1000
+    } else if (this.informacion.upgrade1 == 5){
       this.progresoDinero = this.progresoDinero + 0.2 // En total sería 1
+      this.CosteDinero = "Nivel Maximo"
     }
   }
 
-  nivelPasivo(){
-    if (this.user_info.upgrade3 == 1){
-      this.progresoPasivo = this.progresoPasivo + 0.2 // En total sería 0.20
-    } else if (this.user_info.upgrade3 == 2){
-      this.progresoPasivo = this.progresoPasivo + 0.2 // En total sería 0.40
-    } else if (this.user_info.upgrade3 == 3){
-      this.progresoPasivo = this.progresoPasivo + 0.2 // En total sería 0.60
-    } else if (this.user_info.upgrade3 == 4){
-      this.progresoPasivo = this.progresoPasivo + 0.2 // En total sería 0.80
-    } else if (this.user_info.upgrade3 == 5){
-      this.progresoPasivo = this.progresoPasivo + 0.2 // En total sería 1
+  nivelCooldown(){
+    if (this.informacion.upgrade2 == 1){
+      this.progresoCooldown = this.progresoCooldown + 0.2 // En total sería 0.20
+      this.CosteCooldown = 200
+    } else if (this.informacion.upgrade2 == 2){
+      this.progresoCooldown = this.progresoCooldown + 0.2 // En total sería 0.40
+      this.CosteCooldown = 350
+    } else if (this.informacion.upgrade2 == 3){
+      this.progresoCooldown = this.progresoCooldown + 0.2 // En total sería 0.60
+      this.CosteCooldown = 500
+    } else if (this.informacion.upgrade2 == 4){
+      this.progresoCooldown = this.progresoCooldown + 0.2 // En total sería 0.80
+      this.CosteCooldown = 1000
+    } else if (this.informacion.upgrade2 == 5){
+      this.progresoCooldown = this.progresoCooldown + 0.2 // En total sería 1
+      this.CosteCooldown = "Nivel Maximo"
     }
   }
 
   mejorarDinero(){
-      if (this.user_info.upgrade1 == 0) {
-      this.user_info.dinero = this.user_info.dinero - 100
-      this.user_info.upgrade1 = this.user_info.upgrade1 + 1
-      this.http.post(`${this.url}/upgrade1/${this.user_info.id}`, this.user_info.upgrade1).subscribe((Response: any) => {
+      if (this.informacion.upgrade1 == 0 && this.informacion.dinero >= 100) {
+      this.informacion.dinero = this.informacion.dinero - 100
+      this.informacion.upgrade1 = this.informacion.upgrade1 + 1
+      let upgrade1 = {
+        upgrade1: this.informacion.upgrade1,
+        dinero: this.informacion.dinero
+      }
+      this.http.post(`${this.url}/upgrade1/${this.informacion.id_usuario}`, upgrade1).subscribe((Response: any) => {
+      });
+      this.http.post(`${this.url}/dinero/${this.informacion.id_usuario}`, upgrade1).subscribe((response: any) => {
       });
       console.log("Upgrade1 subido a nivel 1") 
 
-    } /*else if (this.user_info.upgrade1 == 1) {
-      this.user_info.dinero = this.user_info.dinero - 200
-      this.user_info.dinero = this.user_info.upgrade1 + 1
-      this.http.post(`${this.url}/upgrade1/${this.user_info.id}`, this.user_info.upgrade1).subscribe((Response: any) => {
+    }  else if (this.informacion.upgrade1 == 1 && this.informacion.dinero >= 200) {
+      this.informacion.dinero = this.informacion.dinero - 200
+      this.informacion.upgrade1 = this.informacion.upgrade1 + 1
+      let upgrade1 = {
+        upgrade1: this.informacion.upgrade1,
+        dinero: this.informacion.dinero
+      }
+      this.http.post(`${this.url}/upgrade1/${this.informacion.id_usuario}`, upgrade1).subscribe((Response: any) => {
+      });
+      this.http.post(`${this.url}/dinero/${this.informacion.id_usuario}`, upgrade1).subscribe((response: any) => {
       });
       console.log("Upgrade1 subido a nivel 2")
-    }*/
+    } else if (this.informacion.upgrade1 == 2 && this.informacion.dinero >= 350) {
+      this.informacion.dinero = this.informacion.dinero - 350
+      this.informacion.upgrade1 = this.informacion.upgrade1 + 1
+      let upgrade1 = {
+        upgrade1: this.informacion.upgrade1,
+        dinero: this.informacion.dinero
+      }
+      this.http.post(`${this.url}/upgrade1/${this.informacion.id_usuario}`, upgrade1).subscribe((Response: any) => {
+      });
+      this.http.post(`${this.url}/dinero/${this.informacion.id_usuario}`, upgrade1).subscribe((response: any) => {
+      });
+      console.log("Upgrade1 subido a nivel 3")
+
+    } else if (this.informacion.upgrade1 == 3 && this.informacion.dinero >= 500) {
+      this.informacion.dinero = this.informacion.dinero - 500
+      this.informacion.upgrade1 = this.informacion.upgrade1 + 1
+      let upgrade1 = {
+        upgrade1: this.informacion.upgrade1,
+        dinero: this.informacion.dinero
+      }
+      this.http.post(`${this.url}/upgrade1/${this.informacion.id_usuario}`, upgrade1).subscribe((Response: any) => {
+      });
+      this.http.post(`${this.url}/dinero/${this.informacion.id_usuario}`, upgrade1).subscribe((response: any) => {
+      });
+      console.log("Upgrade1 subido a nivel 4")
+
+    } else if (this.informacion.upgrade1 == 4 && this.informacion.dinero >= 1000) {
+      this.informacion.dinero = this.informacion.dinero - 1000
+      this.informacion.upgrade1 = this.informacion.upgrade1 + 1
+      let upgrade1 = {
+        upgrade1: this.informacion.upgrade1,
+        dinero: this.informacion.dinero
+      }
+      this.http.post(`${this.url}/upgrade1/${this.informacion.id_usuario}`, upgrade1).subscribe((Response: any) => {
+      });
+      this.http.post(`${this.url}/dinero/${this.informacion.id_usuario}`, upgrade1).subscribe((response: any) => {
+      });
+      console.log("Upgrade1 subido a nivel 5")
+    }
+    this.nivelDinero();
   }
 
   mejorarCooldown(){
-    if (this.user_info.upgrade2 == 0){
+    if (this.informacion.upgrade2 == 0 && this.informacion.dinero >= 100) {
+      this.informacion.dinero = this.informacion.dinero - 100
+      this.informacion.upgrade2 = this.informacion.upgrade2 + 1
+      let upgrade2 = {
+        upgrade2: this.informacion.upgrade2,
+        dinero: this.informacion.dinero
+      }
+      this.http.post(`${this.url}/upgrade2/${this.informacion.id_usuario}`, upgrade2).subscribe((Response: any) => {
+      });
+      this.http.post(`${this.url}/dinero/${this.informacion.id_usuario}`, upgrade2).subscribe((response: any) => {
+      });
+      console.log("Upgrade2 subido a nivel 1")
 
+  } else if (this.informacion.upgrade2 == 1 && this.informacion.dinero >= 200) {
+    this.informacion.dinero = this.informacion.dinero - 200
+    this.informacion.upgrade2 = this.informacion.upgrade2 + 1
+    let upgrade2 = {
+      upgrade2: this.informacion.upgrade2,
+      dinero: this.informacion.dinero
     }
+    this.http.post(`${this.url}/upgrade2/${this.informacion.id_usuario}`, upgrade2).subscribe((Response: any) => {
+    });
+    this.http.post(`${this.url}/dinero/${this.informacion.id_usuario}`, upgrade2).subscribe((response: any) => {
+    });
+    console.log("Upgrade2 subido a nivel 2")
+
+  } else if (this.informacion.upgrade2 == 2 && this.informacion.dinero >= 350) {
+    this.informacion.dinero = this.informacion.dinero - 350
+    this.informacion.upgrade2 = this.informacion.upgrade2 + 1
+    let upgrade2 = {
+      upgrade2: this.informacion.upgrade2,
+      dinero: this.informacion.dinero
+    }
+    this.http.post(`${this.url}/upgrade2/${this.informacion.id_usuario}`, upgrade2).subscribe((Response: any) => {
+    });
+    this.http.post(`${this.url}/dinero/${this.informacion.id_usuario}`, upgrade2).subscribe((response: any) => {
+    });
+    console.log("Upgrade2 subido a nivel 3")
+
+  } else if (this.informacion.upgrade2 == 3 && this.informacion.dinero >= 500) {
+    this.informacion.dinero = this.informacion.dinero - 500
+    this.informacion.upgrade2 = this.informacion.upgrade2 + 1
+    let upgrade2 = {
+      upgrade2: this.informacion.upgrade2,
+      dinero: this.informacion.dinero
+    }
+    this.http.post(`${this.url}/upgrade2/${this.informacion.id_usuario}`, upgrade2).subscribe((Response: any) => {
+    });
+    this.http.post(`${this.url}/dinero/${this.informacion.id_usuario}`, upgrade2).subscribe((response: any) => {
+    });
+    console.log("Upgrade2 subido a nivel 4")
+
+  } else if (this.informacion.upgrade2 == 4 && this.informacion.dinero >= 1000) {
+    this.informacion.dinero = this.informacion.dinero - 1000
+    this.informacion.upgrade2 = this.informacion.upgrade2 + 1
+    let upgrade2 = {
+      upgrade2: this.informacion.upgrade2,
+      dinero: this.informacion.dinero
+    }
+    this.http.post(`${this.url}/upgrade2/${this.informacion.id_usuario}`, upgrade2).subscribe((Response: any) => {
+    });
+    this.http.post(`${this.url}/dinero/${this.informacion.id_usuario}`, upgrade2).subscribe((response: any) => {
+    });
+    console.log("Upgrade2 subido a nivel 5")
+  }
+  this.nivelCooldown();
+}
+
+  botonesMejora(){
+
+  }
+
+  getInformacion(){
+    this.http.get(`${this.url}/usuarios/${this.user_info.id}`).subscribe((response: any) => {
+      this.informacion = response;
+      console.log(this.informacion)
+    });
   }
 
   Clicker(){
