@@ -28,7 +28,6 @@ export class PaginaUpgradesPage implements OnInit {
   public progresoCooldown: number = 0
   public progresoDinero: number = 0
   public progresoPasivo: number = 0
-  public ProgresoXXX: number = 0
 
   public user: any;
   public user_info: any
@@ -36,7 +35,10 @@ export class PaginaUpgradesPage implements OnInit {
   ngOnInit() {
     this.user_info = this.route.snapshot.params
     console.log(this.user_info)
-    console.log(this.user)
+
+    this.nivelCooldown();
+    this.nivelDinero();
+    this.nivelPasivo();
   }
 
   nivelCooldown(){
@@ -82,22 +84,17 @@ export class PaginaUpgradesPage implements OnInit {
   }
 
   mejorarCooldown(){
-    let upgrade1 = {
-      upgrade1: this.user_info.upgrade1,
-      dinero: this.user_info.dinero
-    }
-
-    if (this.user_info.upgrade1 == 0) {
+      if (this.user_info.upgrade1 == 0) {
       this.user_info.dinero = this.user_info.dinero - 100
       this.user_info.upgrade1 = this.user_info.upgrade1 + 1
-      this.http.post(`${this.url}/upgrade1/${this.user_info.id}`, upgrade1).subscribe((Response: any) => {
+      this.http.post(`${this.url}/upgrade1/${this.user_info.id}`, this.user_info.upgrade1).subscribe((Response: any) => {
       });
       console.log("Upgrade1 subido a nivel 1") 
 
     } else if (this.user_info.upgrade1 == 1) {
       this.user_info.dinero = this.user_info.dinero - 200
       this.user_info.dinero = this.user_info.upgrade1 + 1
-      this.http.post(`${this.url}/upgrade1/${this.user_info.id}`, upgrade1).subscribe((Response: any) => {
+      this.http.post(`${this.url}/upgrade1/${this.user_info.id}`, this.user_info.upgrade1).subscribe((Response: any) => {
       });
       console.log("Upgrade1 subido a nivel 2")
     }

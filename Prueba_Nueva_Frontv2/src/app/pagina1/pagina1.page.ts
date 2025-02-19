@@ -6,6 +6,7 @@ import { IonContent, IonHeader, IonToolbar, IonTitle,
  IonMenuButton, IonMenuToggle, IonListHeader, IonButton, IonFab, IonFabButton, IonFabList, IonGrid, IonCol, IonItem, IonRow} from '@ionic/angular/standalone';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
@@ -20,32 +21,18 @@ export class Pagina1Page implements OnInit {
   public url: string = 'https://proyecto-clicker.onrender.com'
   // public url: string = 'https://localhost:3000/'
 
-  public id: string = "rruiz05@colegiosantamonica.eu";
-  public user_data = {
-    user_id: "",
-    username: "",
-    dinero: 0,
-    cantidad_clicks: 0,
-    cantidad_generada: 0
-  }
+  public user_info: any;
 
-  constructor(private http: HttpClient, private router: Router) { }
-
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.getInformacion();
+    this.user_info = this.route.snapshot.params
+    console.log(this.user_info)
+    console.log(this.url)
   }
 
   Clicker(){
 
     this.router.navigate(['/pagina2'])
-  };
-
-
-  getInformacion(){
-    this.http.get(`${this.url}/usuarios/${this.id}`).subscribe((response: any) => {
-      console.log(response);
-      this.user_data = response;
-    });
   };
 }

@@ -17,6 +17,7 @@ export class PaginaLoginPage implements OnInit {
 
   constructor(private auth: AuthService, @Inject (DOCUMENT) public document: Document) { }
 
+
   ngOnInit() {
   }
 

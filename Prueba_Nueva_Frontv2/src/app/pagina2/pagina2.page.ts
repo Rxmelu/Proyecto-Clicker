@@ -156,8 +156,16 @@ createUser(){
 
   // Función para ir a la pagina del perfil.
   Profile(){
+    let user_info = {
+      id_usuario: this.user.email,
+      username: this.user.nickname,
+      dinero: this.usuarios.dinero,
+      cantidad_clicks: this.usuarios.cantidad_clicks,
+      upgrade1: this.usuarios.upgrade1,
+      upgrade2: this.usuarios.upgrade2
+    }
 
-    this.router.navigate(['/pagina1'])
+    this.router.navigate(['/pagina1', user_info])
   };
 
   // Función para ir a la pagina de upgrades.
